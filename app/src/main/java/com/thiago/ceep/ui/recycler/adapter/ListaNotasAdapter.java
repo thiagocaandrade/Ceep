@@ -36,7 +36,6 @@ public class ListaNotasAdapter extends RecyclerView.Adapter<ListaNotasAdapter.No
         holder.vincula(nota);
     }
 
-
     @Override
     public int getItemCount() {
         return notas.size();
