@@ -61,31 +61,26 @@ public class ListaNotasActivity extends AppCompatActivity {
 
     private List<Nota> pegaTodasNotas() {
         NotaDAO dao = new NotaDAO();
-        for (int i = 0; i < 10; i++) {
-            dao.insere(
-                    new Nota("Título " + (i + 1),
-                            "Descrição " + (i + 1)));
-        }
         return dao.todos();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (ehResultadoInsereNota(requestCode,  data)) {
-            if (resultadoOk(resultCode)){
+        if (ehResultadoInsereNota(requestCode, data)) {
+            if (resultadoOk(resultCode)) {
                 Nota notaRecebida = (Nota) data.getSerializableExtra(CHAVE_NOTA);
                 adiciona(notaRecebida);
             }
         }
 
         if (ehResultadoAlteraNota(requestCode, data)) {
-            if (resultadoOk(resultCode)){
+            if (resultadoOk(resultCode)) {
                 Nota notaRecebida = (Nota) data.getSerializableExtra(CHAVE_NOTA);
                 int posicaoRecebida = data.getIntExtra(NotaActivityConstantes.CHAVE_POSICAO, NotaActivityConstantes.POSICAO_INVALIDA);
-                if (ehPosicaoValida(posicaoRecebida)){
+                if (ehPosicaoValida(posicaoRecebida)) {
                     altera(notaRecebida, posicaoRecebida);
-                } else{
+                } else {
                     Toast.makeText(this,
                             "Ocorreu um problema na alteração da nota",
                             Toast.LENGTH_SHORT).show();
